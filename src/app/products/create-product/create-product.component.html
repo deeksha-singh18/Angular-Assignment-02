@@ -1,0 +1,74 @@
+<div class="container">
+       
+     <div class="text-center" *ngIf="updateMessage">
+        <h2 class="text-danger">{{updateMessage}}</h2>
+     </div>
+
+         <div class="card">
+            
+          <div class="text-center">
+            <h1>{{updateMode ? 'Update Product' : 'Create Product'}}</h1>
+          </div>
+          
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            
+            <div class="form-group">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" class="form-control" formControlName="productName">
+
+              <span *ngIf="form.get('productName').invalid && form.get('productName').touched"
+                class="text-danger">Please enter Product name</span>
+            </div>
+            
+
+            <div class="formGroup">
+              <label for="expiry" class="form-label">Expiry</label>
+              <input type="date" class="form-control" formControlName="expiry">
+
+              <span *ngIf="form.get('expiry').invalid && form.get('expiry').touched" class="text-danger">Please
+                fill expiry date</span>
+            </div>
+
+            
+            <div class="formGroup">
+              <label for="stock" class="form-label">Stock(num of items in stock)</label>
+              <input type="number" class="form-control" formControlName="stock">
+
+              <span *ngIf="form.get('stock').value==null && form.get('stock').touched" class="text-danger" >
+                   Please enter stock number</span> 
+              <span *ngIf="form.get('stock').value < 0" class="text-danger">Min value should be 0</span> 
+            </div>
+            
+
+  
+            <div class="formGroup">
+              <label for="email" class="form-label">Heading</label>
+              <input type="text" class="form-control" formControlName="heading">
+            </div>
+            
+
+            <div class="formGroup">
+              <label for="subheading" class="form-label">Subheading</label>
+              <input type="text" class="form-control" formControlName="subheading">
+            </div>
+
+
+            <div class="formGroup">
+              <label for="tags" class="form-label">Tags</label>
+              <input type="text" class="form-control" formControlName="tags">
+            </div>
+
+
+            <div class="formGroup">
+              <label for="description" class="form-label">Description</label>
+              <textarea  cols="57"  rows="3" class="form-control"  formControlName="description"></textarea>
+            </div>
+      
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">{{updateMode ? 'Update':'Save'}}</button>
+            <button type="button" class="btn btn-danger"
+            style="margin-left:30px" (click)="onCancel()">Cancel</button>
+
+          </form>
+       </div>
+</div>
+   

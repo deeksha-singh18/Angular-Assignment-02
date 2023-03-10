@@ -1,0 +1,49 @@
+<div class="container">
+
+    <div class="card">
+
+     <div class="text-center">
+       <h2>Quick Create Product</h2>
+     </div>
+     
+     <form (ngSubmit)="onSubmit()" #form="ngForm">
+       
+       <div class="form-group" id="div-input">
+           <label for="productName" class="form-label">Product Name</label>
+           <input type="text" class="form-control"
+           ngModel name="productName" required  #productName ="ngModel">
+
+         <span *ngIf="productName.invalid && productName.touched"
+           class="text-danger">Please enter Product name</span>
+       </div>
+
+       
+       <div class="formGroup" id="div-input">
+         <label for="expiry" class="form-label">Expiry</label>
+         <input type="date" class="form-control"
+         ngModel name="expiry" required #expiry="ngModel">
+
+         <span *ngIf="expiry.touched && expiry.invalid" class="text-danger">
+            Please enter expiry date</span>
+        </div>
+
+       
+       <div class="formGroup" id="div-input">
+         <label for="stock" class="form-label">Stock(num of items in stock)</label>
+         <input type="number" class="form-control" ngModel name="stock" required #stock="ngModel">
+
+            <span *ngIf="stock.touched && stock.invalid" class="text-danger">
+                Please enter stock number</span>
+            <span *ngIf="stock.value<0" class="text-danger">Min. value should be 0</span>
+       </div>
+
+      
+ 
+       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+       <button type="reset" class="btn btn-danger" routerLink="/home"
+       style="margin-left:30px">Cancel</button>
+
+     </form>
+  </div>
+</div>
+

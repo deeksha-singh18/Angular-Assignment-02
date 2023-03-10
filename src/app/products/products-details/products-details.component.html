@@ -1,0 +1,30 @@
+<div class="container">
+    
+     <div class="heading" >
+        <h1 class="text-center">Product details</h1>
+     </div>
+
+     <div class="product-details">
+        <p>Product Name : {{product.productName}}</p>
+        <p>Heading : {{product.heading}} </p>
+        <p>Subheading : {{product.subheading}} </p>
+        <p>Description : {{product.description}}</p>
+        <p>Expiry : {{product.expiry}} </p>
+        <p>Number of items available in stock : {{product.stock}}</p>
+        <p>Tags : {{product.tags}}</p>
+     </div>
+
+    
+      <button class="btn btn-success" (click)="onEdit()"
+        style="margin-left: 580px;">Edit</button>
+     
+
+     <button class="btn btn-danger" (click)="onRemove()"
+       style="margin-left:40px">Remove</button>
+
+    
+
+     
+   
+
+</div>

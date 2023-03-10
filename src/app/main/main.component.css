@@ -1,0 +1,16 @@
+ul li{
+    padding-right:50px;
+}
+
+
+button{
+    width: 80px;
+    height: 35px;
+}
+
+
+.container-fluid a {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:25px
+}
+

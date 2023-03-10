@@ -1,0 +1,55 @@
+
+ .card{
+  
+    border: none;
+    width: 400px;
+    padding: 50px;
+    position: absolute;
+    left: 50%;
+    transform:translate(-50%,30%);
+    background:linear-gradient(#7F8C8D,#000000);
+   
+   
+  
+  }
+
+  input.ng-invalid.ng-touched{
+    border: 1px solid red;
+  }
+  
+
+  .login button{
+    width: 300px;
+    height: 40px;
+    font-size:large
+
+  }
+
+  .login{
+    margin-top: 25px;
+  }
+  
+  .card h1{
+    color: white;
+  }
+  
+  label{
+    color: white;
+  }
+  
+  
+  #signup{
+    margin-left: 50px;
+  }
+  
+  .login-link a{
+  
+    color: white;
+    text-decoration-line:underline;
+    cursor: pointer;
+    
+  }
+
+  .login-link{
+    margin-top: 20px;
+  }

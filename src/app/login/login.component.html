@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+
+      <div *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+
+     <app-alert [message]="error" *ngIf="error"
+    (close)="onHandleError()"></app-alert>
+
+      <div class="card" *ngIf="!isLoading">
+
+        <div class="text-center">
+          <h1>{{loginMode ? 'Login':'SignUp'}}</h1>
+       </div>
+        
+        
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+          <div class="mb-3" *ngIf="!loginMode">
+
+            <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="fullName"
+              ngModel name ="fullName"
+              placeholder="Full Name"
+              #fullName="ngModel"
+              required>
+
+            <span *ngIf="fullName.invalid && fullName.touched"
+            class="text-danger">Please enter full name</span>
+          </div>
+
+
+          <div class="mb-3">
+
+            <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" id="email"
+              ngModel name ="email"
+              placeholder="Email"
+              #email="ngModel"
+              required email>
+
+              <span *ngIf="email.invalid && email.touched"
+               class="text-danger">Please enter email</span>
+           </div>
+
+          
+          <div class="mb-3">
+            
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password"
+              ngModel name="password"
+              placeholder="Password"
+              #password="ngModel"
+              required
+              minlength="6">
+              
+            <span *ngIf="password.invalid && password.touched"
+            class="text-danger">Please enter valid password</span>
+          </div>
+          
+          
+          <div class="login">
+            <button type="submit" class="btn btn-success"
+            [disabled]="!f.valid">{{loginMode ? 'Login' : 'SignUp'}}</button>
+          </div>
+          
+        </form>
+            
+          <div class="login-link">
+           <a (click)="onSwitch()">{{loginMode ?  'New user? Create an account':'Already user? Click to login'}}</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+ 

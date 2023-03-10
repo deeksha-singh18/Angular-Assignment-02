@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+
+      <!-- <div *ngIf="isLoading">
+          <app-loading-spinner></app-loading-spinner>
+        </div> -->
+
+      <div class="alert alert-danger" *ngIf="error" id="error">
+        <h3 class="text-center">Invalid credentials</h3>
+      </div>
+
+      <div class="card">
+
+        <div class="text-center">
+          <h1>Admin</h1>
+        </div>
+
+
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+          <div class="mb-3">
+
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" ngModel name="email" placeholder="Email" #email="ngModel"
+              required email>
+
+            <span *ngIf="email.invalid && email.touched" class="text-danger">Please enter email</span>
+          </div>
+
+
+          <div class="mb-3">
+
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" ngModel name="password" placeholder="Password"
+              #password="ngModel" required minlength="6">
+
+            <span *ngIf="password.invalid && password.touched" class="text-danger">Please enter valid password</span>
+          </div>
+
+
+          <div class="login">
+            <button type="submit" class="btn btn-success" [disabled]="!f.valid">Login</button>
+          </div>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

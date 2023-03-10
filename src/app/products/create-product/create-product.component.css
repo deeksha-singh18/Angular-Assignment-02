@@ -1,0 +1,53 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+ 
+}
+
+
+.card{
+    border: none;
+    width: 650px;
+    padding: 30px;
+    position: absolute;
+    left: 30%;
+    background-color: bisque;
+  }
+  
+  .card h1{
+    color: black;
+  }
+
+  
+  label{
+    color: black;
+    font-size: large;
+    font-weight:500;
+  }
+  
+
+  #reminder label:after{
+
+    content:" *";
+    color: red;
+
+  }
+
+
+  form{
+    padding-top: 30px;
+  }
+
+  input{
+    margin-bottom: 20px;
+    height: 35px;
+  }
+
+  button{
+    margin-top: 30px;
+    width: 70px;
+    height: 40px;
+  }
+
+  

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="card">
+        <div class="heading">
+            <h2 class="text-center">Settings</h2>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #settingForm="ngForm">
+
+          <div class="settings">
+
+            <div class="form-group">
+               <input type="checkbox" name="edit" id="" [(ngModel)]="isEdit" ngModel name="isEdit">
+               <label for="" class="form-label">Allow Edit</label>
+            </div>
+
+            <div class="form-group">
+              <input type="checkbox" name="create" id="" [(ngModel)]="isCreate" ngModel name="isCreate">
+              <label for="" class="form-label">Allow Create</label>
+            </div>
+
+
+           <div class="form-group">
+             <input type="checkbox" name="productSearch" id="" [(ngModel)]="isProductSearch" ngModel name="isProductSearch">
+             <label for="" class="form-label">Allow Product Search</label>
+           </div>
+
+
+           <div class="form-group">
+             <input type="checkbox" name="multipleDelete" id="" [(ngModel)]="isMultipleDelete" ngModel name="isMultipleDelete">
+             <label for="" class="form-label">Allow Multiple Delete</label>
+           </div>
+
+          </div>
+         
+ 
+           
+              <button type="button" class="btn btn-danger"
+                (click)="onReset()">Reset</button>
+           
+              <button type="submit" class="btn btn-success"
+                style="margin-left:80px">Save</button>
+        </form>
+       
+    </div>
+</div>

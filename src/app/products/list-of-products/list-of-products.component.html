@@ -1,0 +1,74 @@
+ <div class="container">
+    <div class="list">
+
+        <div class="text-center">
+            <h2>List of Products</h2>
+        </div>
+
+        <div class="search-bars">
+            <input type="search" class="search-bar-1" placeholder="Search-1" [(ngModel)]="searchBarValue1">
+           <input type="search" class="search-bar-2" placeholder="Search-2" [(ngModel)]="searchBarValue2"
+            (keyboardevent)="onApiSearch(searchBarValue2)" *ngIf="allowMultipleDelete">
+        </div>
+
+        <div class="product-data">
+
+            <div class="btn">
+                <button type="button" class="btn btn-danger">Delete Products</button>
+                <button type="button" class="btn btn-primary" routerLink="/main"
+                style="margin-left: 40px;">Go to Main screen</button>
+            </div>
+
+           
+
+
+
+            <table class="table table-bordered">
+                <thead>
+                  <tr class="head-data">
+                    <th>CheckList</th>
+                    <th>Name</th>
+                    <th>Product Expiry</th>
+                    <th>No. of items in stock</th>
+                    <th>Heading</th>
+                    <th>Subheading</th>
+                    <th>tags</th>
+                    <th>Description</th>
+                    <th>Actions</th>    
+                </tr>
+               </thead>
+
+               <tbody>
+               <tr *ngFor="let product of productData | filter:searchBarValue1 ">
+
+                <td><input type="checkbox" name="check" id="check" [(ngModel)]="selectedItems"></td>
+                <td>{{product.productName}}</td>
+                <td>{{product.expiry}}</td>
+                <td>{{product.stock}}</td>
+                <td>{{product.heading}}</td>
+                <td>{{product.subheading}}</td>
+                <td>{{product.tags}}</td>
+                <td>{{product.description}}</td>
+                <td>
+                    <div class="edit">
+                        <button class="btn btn-success"  (click)="onEdit(product.id)"
+                        >Edit</button> 
+                    </div>
+                    <div class="cancel">
+                        <button class="btn btn-danger" (click)="onRemove(product.id)">Remove</button>
+                    </div>
+                    
+                  
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+       
+
+
+       
+    
+    </div>
+</div>
+</div> 
