@@ -26,7 +26,6 @@ const routes: Routes = [
   {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
   {path:'admin',component:AdminComponent},
   {path:'main',component:NavbarComponent,canActivate:[AuthGuard]},
-  {path:'header',component:HeaderComponent},
   {path:'**',component:NotFoundComponent},
  
   
