@@ -18,7 +18,6 @@ export class SettingsComponent implements OnInit {
   isProductSearch=true;
   isMultipleDelete=false;
   settingData:Setting;
-  
 
   constructor(private settingService:SettingService){}
 
@@ -54,17 +53,18 @@ export class SettingsComponent implements OnInit {
     this.settingService.updateSettings(this.settingData)
     .subscribe(resData=>{
       console.log("Update Settings=>",resData);
+      alert("Settings have been updated");
       console.log("Current settings have been updated");
       
-      
-    })
+    });
 
    
     setTimeout(() => {
       // this.settingForm.reset();
       this.onReset();
-      
-    }, 1000);
+     }, 2000);
+
+     
 
   }
 
@@ -74,7 +74,10 @@ export class SettingsComponent implements OnInit {
     this.isCreate=true;
     this.isProductSearch=true;
     this.isMultipleDelete=false;
+
   }
+    
+   
 
 
 }

@@ -4,6 +4,7 @@ import { Product } from 'src/app/model/product.model';
 import { Router } from '@angular/router';
 import { filter, pipe } from 'rxjs';
 import { SettingService } from 'src/app/shared/services/setting.service';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-list-of-products',
@@ -19,7 +20,9 @@ export class ListOfProductsComponent implements OnInit {
   allowEdit=true;
   productData:Product[]=[];
   product:Product;
-  selectedItems="";
+  allSelectedItems="";
+  selectItem=""
+  selectedItems=[];
 
   constructor(private productService:ProductService,private router:Router,
     private settingService:SettingService){}
@@ -49,12 +52,12 @@ export class ListOfProductsComponent implements OnInit {
 
    
    onRemove(id:string){
-    if (confirm("Do you want to remove it ?")==true){
+    if (confirm("Do you want to remove it ?")){
       this.productService.deleteProduct(id)
-    .subscribe(()=>{
+      .subscribe(()=>{
       this.productService.getProductDetails()
       .subscribe((data)=>{
-        this.productData=data;
+       this.productData=data;
       });
     })
 
@@ -63,10 +66,43 @@ export class ListOfProductsComponent implements OnInit {
     
   }
 
+  onChecked(itemId:string){
+    if(this.selectedItems.find(x => x === itemId)){
+      this.selectedItems.splice(this.selectedItems.indexOf(itemId),1);
+    }
+    else{
+       this.selectedItems.push(itemId);
+    }
+    console.log(this.selectedItems);
+      
+  }
+
+
+  deleteSelectedItems(){
+    if(confirm("Do you want to delete selected products ?")){
+      for(let itemId of this.selectedItems){
+         this.productService.deleteProduct(itemId)
+         .subscribe(()=>{
+         this.productService.getProductDetails()
+         .subscribe(resData=>{
+          this.productData=resData;
+        })
+      })
+    }
+     
+
+    
+  }
+    
+
+}
+
   deleteAllProductsData(){
-    this.productService.deleteAllProducts().subscribe(()=>{
-      this.productData=[];
+    if(confirm("Do you want to delete all products list ?")){
+       this.productService.deleteAllProducts().subscribe(()=>{
+       this.productData=[];
     })
+  }
   }
 
 

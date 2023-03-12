@@ -2,31 +2,35 @@
     <div class="list">
 
         <div class="text-center">
-            <h2>List of Products</h2>
+            <h1 style="margin-top: 20px;">List of Products</h1>
         </div>
 
         <div class="search-bars">
-            <input type="search" class="search-bar-1" placeholder="Search-1" [(ngModel)]="searchBarValue1">
-           <input type="search" class="search-bar-2" placeholder="Search-2" [(ngModel)]="searchBarValue2"
-            (keyboardevent)="onApiSearch(searchBarValue2)" *ngIf="allowMultipleDelete">
+           
+            <input type="search" class="search-bar-1" placeholder="Search...." [(ngModel)]="searchBarValue1">
+             <span class="fa fa-search" id="search1"></span>
+
+           <input type="search" class="search-bar-2" placeholder="Search...." [(ngModel)]="searchBarValue2"
+           (keyup)="onApiSearch(searchBarValue2)" [hidden]="!allowMultipleDelete">
+            <span class="fa fa-search" id="search2"></span>
         </div>
+
 
         <div class="product-data">
 
             <div class="btn">
-                <button type="button" class="btn btn-danger">Delete Products</button>
+                <button type="button" class="btn btn-danger" (click)="deleteSelectedItems()">Delete selected Products</button>
                 <button type="button" class="btn btn-primary" routerLink="/main"
                 style="margin-left: 40px;">Go to Main screen</button>
+                <button class="btn btn-danger" (click)="deleteAllProductsData()" style="margin-left: 40px;">
+                    Delete all Products list</button>
             </div>
 
            
-
-
-
             <table class="table table-bordered">
                 <thead>
                   <tr class="head-data">
-                    <th>CheckList</th>
+                    <th><input type="checkbox" name="check" id="check" [(ngModel)]="allSelectedItems"></th>
                     <th>Name</th>
                     <th>Product Expiry</th>
                     <th>No. of items in stock</th>
@@ -41,7 +45,7 @@
                <tbody>
                <tr *ngFor="let product of productData | filter:searchBarValue1 ">
 
-                <td><input type="checkbox" name="check" id="check" [(ngModel)]="selectedItems"></td>
+                <td><input type="checkbox" name="check" id="check" (change)="onChecked(product.id)"></td>
                 <td>{{product.productName}}</td>
                 <td>{{product.expiry}}</td>
                 <td>{{product.stock}}</td>
@@ -63,7 +67,7 @@
               </tr>
             </tbody>
         </table>
-
+       
        
 
 

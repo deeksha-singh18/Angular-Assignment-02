@@ -15,7 +15,7 @@ h2{
     position: absolute;
     top: 13%;
     left: 25%;
-    width: 350px;
+    width: 300px;
     height: 40px;
     border-radius: 5px;
 }
@@ -25,7 +25,7 @@ h2{
     position: absolute;
     top: 13%;
     left: 50%;
-    width: 350px;
+    width: 300px;
     height: 40px;
     border-radius: 5px;
 }
@@ -65,4 +65,26 @@ button{
     margin-top:40px
 }
 
+
+#search1{
+    position:absolute;
+    left: 26%;
+    top: 15%;
+}
+
+#search2{
+    position:absolute;
+    left: 51%;
+    top: 15%;
+
+}
+
+.search-bar-2::placeholder{
+   text-align: center;
+}
+
+#check{
+    width: 20px;
+    height: 15px;
+}
 
