@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductsDetailsComponent implements OnInit {
 
   productId="";
-  product:undefined | Product;
+  product:Product;
 
   constructor(private activateRoute:ActivatedRoute,private productService:ProductService,
     private router:Router){}
@@ -20,8 +20,6 @@ export class ProductsDetailsComponent implements OnInit {
   ngOnInit(){
 
     this.productId=this.activateRoute.snapshot.paramMap.get('id');
-   // this.product=this.productData.find(x =>x.id==this.productId);
-    // console.log(this.product);
     this.productService.getProduct(this.productId)
     .subscribe(resData =>{
       this.product=resData;

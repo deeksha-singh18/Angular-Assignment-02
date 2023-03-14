@@ -11,15 +11,16 @@
              <span class="fa fa-search" id="search1"></span>
 
            <input type="search" class="search-bar-2" placeholder="Search...." [(ngModel)]="searchBarValue2"
-           (keyup)="onApiSearch(searchBarValue2)" [hidden]="!allowMultipleDelete">
-            <span class="fa fa-search" id="search2"></span>
+            [hidden]="!allowProductSearch">
+            <span class="fa fa-search" id="search2" [hidden]="!allowProductSearch"></span>
         </div>
 
 
         <div class="product-data">
 
             <div class="btn">
-                <button type="button" class="btn btn-danger" (click)="deleteSelectedItems()">Delete selected Products</button>
+                <button type="button" class="btn btn-danger" (click)="deleteSelectedItems()" *ngIf="allowMultipleDelete">
+                    Delete selected Products</button>
                 <button type="button" class="btn btn-primary" routerLink="/main"
                 style="margin-left: 40px;">Go to Main screen</button>
                 <button class="btn btn-danger" (click)="deleteAllProductsData()" style="margin-left: 40px;">
@@ -30,7 +31,7 @@
             <table class="table table-bordered">
                 <thead>
                   <tr class="head-data">
-                    <th><input type="checkbox" name="check" id="check" [(ngModel)]="allSelectedItems"></th>
+                    <th *ngIf="allowMultipleDelete"><input type="checkbox" id="check"></th>
                     <th>Name</th>
                     <th>Product Expiry</th>
                     <th>No. of items in stock</th>
@@ -43,10 +44,10 @@
                </thead>
 
                <tbody>
-               <tr *ngFor="let product of productData | filter:searchBarValue1 ">
+               <tr *ngFor="let product of productData | filter:searchBarValue1 | sort:'stock' ">
 
-                <td><input type="checkbox" name="check" id="check" (change)="onChecked(product.id)"></td>
-                <td>{{product.productName}}</td>
+                <td *ngIf="allowMultipleDelete"><input type="checkbox" name="check" id="check" (change)="onChecked(product.id)"></td>
+                <td><a href="#" routerLink="/products-details/{{product.id}}" style="text-decoration: none;">{{product.productName}}</a></td>
                 <td>{{product.expiry}}</td>
                 <td>{{product.stock}}</td>
                 <td>{{product.heading}}</td>
@@ -55,11 +56,15 @@
                 <td>{{product.description}}</td>
                 <td>
                     <div class="edit">
-                        <button class="btn btn-success"  (click)="onEdit(product.id)"
-                        >Edit</button> 
+                        <i class="fas fa-edit" (click)="onEdit(product.id)" id="icon"
+                        style="font-size:20px;color:blue"></i>
+                        
+                        <!-- <button class="btn btn-success"  (click)="onEdit(product.id)"
+                        >Edit</button>  -->
                     </div>
                     <div class="cancel">
-                        <button class="btn btn-danger" (click)="onRemove(product.id)">Remove</button>
+                        <i class="fa fa-trash" (click)="onRemove(product.id)" style="font-size:20px;color:red" id="icon"></i>
+                        <!-- <button class="btn btn-danger" (click)="onRemove(product.id)">Remove</button> -->
                     </div>
                     
                   

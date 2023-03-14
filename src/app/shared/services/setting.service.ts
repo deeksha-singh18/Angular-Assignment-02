@@ -13,13 +13,14 @@ export class SettingService{
     storeSettings(settingsData:Setting){
         return this.http.post<Setting>('https://angular-assignment-2906b-default-rtdb.firebaseio.com/settings.json',settingsData);
     }
+  
 
     getSettings(){
-        return this.http.get<Setting>('https://angular-assignment-2906b-default-rtdb.firebaseio.com/settings.json');
+      return this.http.get<Setting>('https://angular-assignment-2906b-default-rtdb.firebaseio.com/settings.json');
     }
 
-    updateSettings(settingData:Setting){
-        return this.http.put('https://angular-assignment-2906b-default-rtdb.firebaseio.com/settings.json',settingData);
+    updateSettings(settingsData:Setting){
+      return this.http.put<Setting>('https://angular-assignment-2906b-default-rtdb.firebaseio.com/settings.json',settingsData);
     }
 
 

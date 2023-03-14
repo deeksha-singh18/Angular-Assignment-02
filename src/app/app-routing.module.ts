@@ -9,23 +9,21 @@ import { ListOfProductsComponent } from './products/list-of-products/list-of-pro
 import { ProductsDetailsComponent } from './products/products-details/products-details.component';
 import { QuickCreateProductComponent } from './products/quick-create-product/quick-create-product.component';
 import { SettingsComponent } from './settings/settings.component';
-import { HamburgerComponent } from './shared/components/navbar/hamburger/hamburger.component';
-import { HeaderComponent } from './shared/components/navbar/header/header.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo:'/login-type', pathMatch:'full'},
+  {path:'login-type',component:MainComponent},
   {path:'login',component:LoginComponent},
+  {path:'admin',component:AdminComponent},
   {path:'create-product/:id',component:CreateProductComponent,canActivate:[AuthGuard]},
   {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
   {path:'home',component:ListOfProductsComponent,canActivate:[AuthGuard]},
   {path:'quick-create-product',component:QuickCreateProductComponent,canActivate:[AuthGuard]},
   {path:'products-details/:id',component:ProductsDetailsComponent,canActivate:[AuthGuard]},
-  {path:'login-type',component:MainComponent},
   {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
-  {path:'admin',component:AdminComponent},
-  {path:'main',component:NavbarComponent,canActivate:[AuthGuard]},
+  {path:'main',component:NavbarComponent},
   {path:'**',component:NotFoundComponent},
  
   

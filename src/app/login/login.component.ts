@@ -6,8 +6,6 @@ import { AuthResponseData } from '../model/authresponse.model';
 import { Observable } from 'rxjs';
 
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +18,7 @@ export class LoginComponent {
   error:string = "";
   loginMode=true;
   isLoading=false;
-  admin=false;
+  // admin=false;
 
   @ViewChild('f') loginForm:NgForm;
 
@@ -39,7 +37,7 @@ export class LoginComponent {
   
   onSubmit() {
     
-    console.log(this.loginForm);
+    // console.log(this.loginForm.value);
 
     if(this.loginForm.invalid){
       return;

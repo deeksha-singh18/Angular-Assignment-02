@@ -11,10 +11,11 @@ import { isNgTemplate } from '@angular/compiler';
   templateUrl: './list-of-products.component.html',
   styleUrls: ['./list-of-products.component.css']
 })
+
 export class ListOfProductsComponent implements OnInit {
 
   searchBarValue1="";
-  searchBarValue2="";
+  searchBarValue2="" ;
   allowMultipleDelete=false;
   allowProductSearch=true;
   allowEdit=true;
@@ -67,13 +68,15 @@ export class ListOfProductsComponent implements OnInit {
   }
 
   onChecked(itemId:string){
-    if(this.selectedItems.find(x => x === itemId)){
-      this.selectedItems.splice(this.selectedItems.indexOf(itemId),1);
-    }
-    else{
+   
+      if(this.selectedItems.find(x => x === itemId)){
+         this.selectedItems.splice(this.selectedItems.indexOf(itemId),1);
+      }
+      else{
        this.selectedItems.push(itemId);
-    }
-    console.log(this.selectedItems);
+      }
+       console.log(this.selectedItems);
+    
       
   }
 
@@ -106,23 +109,7 @@ export class ListOfProductsComponent implements OnInit {
   }
 
 
-  onApiSearch(searchBarValue2:string){
-    if(this.allowProductSearch){
-      setTimeout(() => {
-      return this.productService.getProductDetails()
-        .subscribe(resData =>{
-        const filteredData = resData.filter((data) => {
-         data.name.toLowerCase().indexOf(this.searchBarValue2.toLowerCase())>-1 || data.heading.toLowerCase().indexOf(this.searchBarValue2.toLowerCase())>-1 
-         || data.subheading.toLowerCase().indexOf(this.searchBarValue2.toLowerCase())>-1 ||
-         data.tags.toLowerCase().indexOf(this.searchBarValue2.toLowerCase())>-1});
-         
-         this.productData=filteredData
-       });
-    }, 1000);
-  }
-  }
-
-
+  
 
 
 

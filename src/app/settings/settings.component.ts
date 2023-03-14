@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SettingService } from '../shared/services/setting.service';
 import { Setting } from '../model/setting.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,7 @@ export class SettingsComponent implements OnInit {
   isMultipleDelete=false;
   settingData:Setting;
 
-  constructor(private settingService:SettingService){}
+  constructor(private settingService:SettingService,private router:Router){}
 
   ngOnInit(): void {
     this.settingService.getSettings()
@@ -55,6 +56,7 @@ export class SettingsComponent implements OnInit {
       console.log("Update Settings=>",resData);
       alert("Settings have been updated");
       console.log("Current settings have been updated");
+      this.router.navigate(['/home']);
       
     });
 

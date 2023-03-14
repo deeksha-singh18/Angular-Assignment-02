@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError,catchError,Subject,tap } from 'rxjs';
 import { AuthResponseData } from 'src/app/model/authresponse.model';
-import { User } from '../../login/user.model';
+import { User } from 'src/app/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,15 @@ export class AuthService {
     constructor(private http:HttpClient,private router:Router) { }
   
     user = new Subject<User>();
+    // isAdmin:boolean=false;
 
 
     login(email:string,password:string){
 
        return this.http.post<AuthResponseData>(
         
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCzR7D1QtQdfjFhjDY02UMII45hrGD2BK0'
-            ,
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCzR7D1QtQdfjFhjDY02UMII45hrGD2BK0',
+      
             {email:email,
              password:password,
              returnSecureToken:true
@@ -45,8 +46,7 @@ export class AuthService {
     signup(email:string,password:string){
 
       return this.http.post<AuthResponseData>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCzR7D1QtQdfjFhjDY02UMII45hrGD2BK0'
-           
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAFy_rXBzm_B2iO8dHtouATTTah76nDOr8'
             ,{
                 email:email,
                 password:password,
@@ -114,6 +114,7 @@ export class AuthService {
       this.user.next(null);
     }
 
+   
 
 
 

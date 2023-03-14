@@ -1,17 +1,18 @@
-<div class="container">
+<div class="container" *ngIf="product!=undefined">
     
      <div class="heading" >
         <h1 class="text-center">Product details</h1>
      </div>
 
      <div class="product-details">
-        <p>Product Name : {{product.productName}}</p>
-        <p>Heading : {{product.heading}} </p>
-        <p>Subheading : {{product.subheading}} </p>
-        <p>Description : {{product.description}}</p>
-        <p>Expiry : {{product.expiry}} </p>
-        <p>Number of items available in stock : {{product.stock}}</p>
-        <p>Tags : {{product.tags}}</p>
+        
+         <p><strong>Product Name : </strong>{{product.productName}}</p>
+        <p><strong>Heading :</strong> {{product.heading}} </p>
+        <p><strong>Subheading :</strong> {{product.subheading}} </p>
+        <p><strong>Description</strong> : {{product.description}}</p>
+        <p><strong>Expiry :</strong> {{product.expiry}} </p>
+        <p><strong>Number of items available in stock :</strong> {{product.stock}}</p>
+        <p><strong>Tags :</strong> {{product.tags}}</p>
      </div>
 
     

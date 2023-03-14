@@ -1,5 +1,4 @@
 export class Product{
-    // select?:boolean;
     productName: string;
     expiry: Date;
     stock: number;

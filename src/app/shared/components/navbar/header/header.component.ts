@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     
       this.userSub=this.authService.user.subscribe(user => {
       this.isAuthenticated= !!user;
-      console.log(this.isAuthenticated);
+      // console.log(this.isAuthenticated);
 
     });
   }
@@ -47,11 +47,11 @@ export class HeaderComponent implements OnInit {
 
   onLogout(){
     
-    console.log("Sucessfully logout");
+    // console.log("Sucessfully logout");
     // console.log("user => ",this.authService.user);
     this.authService.logout();
     // console.log("user => ",this.authService.user);
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login-type'])
   }
 
 
