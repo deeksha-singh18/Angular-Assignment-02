@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'home',component:ListOfProductsComponent},
 
   // {path:'create-product/:id',component:CreateProductComponent,canActivate:[AuthGuard]},
-  {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
+//   {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
   // {path:'quick-create-product',component:QuickCreateProductComponent,canActivate:[AuthGuard]},
   // {path:'products-details/:id',component:ProductsDetailsComponent,canActivate:[AuthGuard]},
   // {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
