@@ -50,6 +50,7 @@ import { SortPipe } from './sort.pipe';
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
+   
     SidebarModule.forRoot()
   ],
   providers: [],

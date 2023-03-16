@@ -34,7 +34,6 @@ export class CreateProductComponent {
       'stock': new FormControl(0, [Validators.required,Validators.pattern("^[0-9]*$")]),
       'heading': new FormControl(null, [Validators.maxLength(150)]),
       'subheading': new FormControl(null, [Validators.maxLength(160)]),
-      // 'tags':new FormArray([],[Validators.maxLength(10)]),
       'tags': new FormControl(null, [Validators.required]),
       'description': new FormControl(null, [Validators.maxLength(250)])
     });
@@ -80,13 +79,16 @@ export class CreateProductComponent {
         .subscribe(resData => {
           if (resData) {
             this.updateMessage = "Product has been updated";
+           
           }
+         
         });
 
       setTimeout(() => {
+        alert("Product has been updated!")
         this.form.reset();
         this.router.navigate(['/home'])
-      }, 1000)
+      }, 500)
     }
 
     else {

@@ -16,7 +16,7 @@
       <span><a href="#" routerLink="/create-product">Create Product</a></span>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isAdmin">
       <i class="fas fa-cog mx-1"></i>
       <span><a href="#" routerLink="/settings">Settings</a></span>
     </li>

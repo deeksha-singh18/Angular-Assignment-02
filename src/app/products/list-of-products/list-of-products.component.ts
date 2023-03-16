@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/model/product.model';
 import { Router } from '@angular/router';
-import { filter, pipe } from 'rxjs';
+import { map, fromEvent, pipe, debounceTime, distinctUntilChanged } from 'rxjs';
 import { SettingService } from 'src/app/shared/services/setting.service';
-import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-list-of-products',
@@ -12,10 +11,10 @@ import { isNgTemplate } from '@angular/compiler';
   styleUrls: ['./list-of-products.component.css']
 })
 
-export class ListOfProductsComponent implements OnInit {
+
+export class ListOfProductsComponent implements OnInit,AfterViewInit {
 
   searchBarValue1="";
-  searchBarValue2="" ;
   allowMultipleDelete=false;
   allowProductSearch=true;
   allowEdit=true;
@@ -25,8 +24,11 @@ export class ListOfProductsComponent implements OnInit {
   selectItem=""
   selectedItems=[];
 
+  @ViewChild('searchBarValue2') searchValue:ElementRef;
+
   constructor(private productService:ProductService,private router:Router,
     private settingService:SettingService){}
+
 
   ngOnInit(): void {
    
@@ -43,6 +45,25 @@ export class ListOfProductsComponent implements OnInit {
     })
     
   }
+
+  ngAfterViewInit(): void {
+    
+    const searchedData = fromEvent<any>(this.searchValue.nativeElement,'keyup')
+    .pipe(map(event => event.target.value),
+    debounceTime(1000),
+    distinctUntilChanged())
+
+    searchedData.subscribe(res =>{
+      console.log(res);
+      this.productService.searchedProducts(res)
+      .subscribe((res:Product[]) =>{
+        this.productData=res;
+      })
+      
+    })
+  }
+
+
 
   onEdit(id:string){
     if(this.allowEdit){

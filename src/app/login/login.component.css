@@ -1,6 +1,4 @@
-
- .card{
-  
+  .card{
     border: none;
     width: 400px;
     padding: 50px;
@@ -8,9 +6,6 @@
     left: 50%;
     transform:translate(-50%,30%);
     background:linear-gradient(#7F8C8D,#000000);
-   
-   
-  
   }
 
   input.ng-invalid.ng-touched{
@@ -43,7 +38,6 @@
   }
   
   .login-link a{
-  
     color: white;
     text-decoration-line:underline;
     cursor: pointer;

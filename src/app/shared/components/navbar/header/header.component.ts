@@ -16,20 +16,29 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router:Router,private authService:AuthService){}
 
-  private userSub:Subscription;
+  // private userSub:Subscription;
   isAuthenticated=false;
   @Output() sideBarToggled = new EventEmitter<boolean>();
   showSideBar: boolean = false;
 
+
   
 
-  ngOnInit() {
-    
-      this.userSub=this.authService.user.subscribe(user => {
-      this.isAuthenticated= !!user;
-      // console.log(this.isAuthenticated);
+  ngOnInit(){
 
-    });
+     this.authService.user.subscribe(res => {
+      if(res){
+        this.isAuthenticated=true;
+      }
+      else{
+        this.isAuthenticated=false;
+      }
+      // this.isAuthenticated=!res ? false : true;
+      console.log("user is" ,this.isAuthenticated);
+      console.log(res);
+      });
+   
+    
   }
 
 
@@ -46,18 +55,16 @@ export class HeaderComponent implements OnInit {
 
 
   onLogout(){
-    
-    // console.log("Sucessfully logout");
-    // console.log("user => ",this.authService.user);
     this.authService.logout();
-    // console.log("user => ",this.authService.user);
+    this.isAuthenticated=false;
+    console.log("Sucessfully logout");
     this.router.navigate(['/login-type'])
   }
 
 
-  ngOnDestroy(){
-    this.userSub.unsubscribe();
-  }
+  // ngOnDestroy(){
+  //   this.userSub.unsubscribe();
+  // }
 
 
 }

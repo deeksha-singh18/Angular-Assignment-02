@@ -10,7 +10,7 @@
             <input type="search" class="search-bar-1" placeholder="Search...." [(ngModel)]="searchBarValue1">
              <span class="fa fa-search" id="search1"></span>
 
-           <input type="search" class="search-bar-2" placeholder="Search...." [(ngModel)]="searchBarValue2"
+           <input type="search" class="search-bar-2" placeholder="Search...." #searchBarValue2
             [hidden]="!allowProductSearch">
             <span class="fa fa-search" id="search2" [hidden]="!allowProductSearch"></span>
         </div>
@@ -44,7 +44,7 @@
                </thead>
 
                <tbody>
-               <tr *ngFor="let product of productData | filter:searchBarValue1 | sort:'stock' ">
+               <tr *ngFor="let product of productData | filter:searchBarValue1  ">
 
                 <td *ngIf="allowMultipleDelete"><input type="checkbox" name="check" id="check" (change)="onChecked(product.id)"></td>
                 <td><a href="#" routerLink="/products-details/{{product.id}}" style="text-decoration: none;">{{product.productName}}</a></td>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { AdminComponent } from 'src/app/admin/admin.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SettingService } from 'src/app/shared/services/setting.service';
 
@@ -11,8 +10,8 @@ import { SettingService } from 'src/app/shared/services/setting.service';
 })
 export class HamburgerComponent implements OnInit {
 
-  allowCreate=true;
-  // isAdmin:boolean=false;
+  allowCreate:boolean=true;
+  isAdmin:boolean=false;
 
   constructor(private settingService:SettingService,private authService:AuthService){}
 
@@ -21,7 +20,9 @@ export class HamburgerComponent implements OnInit {
     this.settingService.getSettings().
     subscribe(resData=>{
       this.allowCreate=resData.isCreate;
-    })
+    });
+
+    
     
   }
 

@@ -16,7 +16,6 @@ export class AdminComponent {
 
   error:string = "";
   isLoading=false;
-  isAdmin:boolean=false;
 
   @ViewChild('f') loginForm:NgForm;
 
@@ -43,9 +42,8 @@ export class AdminComponent {
     this.authService.login(email,password)
     .subscribe(resData => {
         console.log(resData);
-        this.isAdmin=true;
         this.isLoading=false;
-        this.router.navigate(['/main']);
+        this.router.navigate(['/settings']);
       },
 
       errorMessage => {
