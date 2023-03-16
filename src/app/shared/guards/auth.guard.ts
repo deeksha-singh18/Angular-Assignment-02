@@ -15,10 +15,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      return this.authService.user.pipe(map(user =>{
-          return !!user;
-          
-        }));
+       return this.authService.user.pipe(map(res =>{
+        return !!res;
+        }))
+     
+       
       
   }
   

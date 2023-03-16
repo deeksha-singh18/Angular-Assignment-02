@@ -1,15 +1,16 @@
 .side-bar{
     background-color:rgb(52, 58, 64);
-    width: 400px;
+    width: 350px;
     height: 800px;
     padding: 20px;
 }
 
 ul li{
-    font-size: 22px;
+    font-size: 20px;
     font-family:Georgia, 'Times New Roman', Times, ;
     font-weight:600;
-    margin: 30px;
+    margin: 25px;
+    margin-bottom: 40px;
     color: white;
     list-style: none;
    
