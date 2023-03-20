@@ -36,8 +36,16 @@ export class QuickCreateProductComponent {
   }
 
   onCancel() {
-    this.location.back();
-    // this.router.navigate(['/home']);
+     if(confirm("Do you want to discard the changes?")){
+      this.location.back();
+      // this.router.navigate(['/home']);
+     }
+    
+    else{
+      // this.location.back();
+      this.router.navigate(['/quick-create-product'])
+    }
+   
   }
 
 

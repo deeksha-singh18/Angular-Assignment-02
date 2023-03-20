@@ -18,19 +18,12 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'admin',component:AdminComponent},
   {path:'main',component:NavbarComponent},
-  
   {path:'home',component:ListOfProductsComponent},
   {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
   {path:'create-product/:id',component:CreateProductComponent,canActivate:[AuthGuard]},
   {path:'quick-create-product',component:QuickCreateProductComponent,canActivate:[AuthGuard]},
   {path:'products-details/:id',component:ProductsDetailsComponent,canActivate:[AuthGuard]},
   {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
-
-  // {path:'create-product/:id',component:CreateProductComponent},
-  // {path:'create-product',component:CreateProductComponent},
-  // {path:'quick-create-product',component:QuickCreateProductComponent},
-  // {path:'products-details/:id',component:ProductsDetailsComponent},
-  // {path:'settings',component:SettingsComponent},
   {path:'**',component:NotFoundComponent},
  
   

@@ -109,9 +109,21 @@ export class CreateProductComponent {
 
 
   onCancel() {
-    this.location.back();
-    // this.router.navigate(['/home']);
-  }
+      if(confirm("Do you want to discard the updates?")){
+        this.location.back();
+         // this.router.navigate(['/home']);
+      }
+      else{
+        this.router.navigate(['/create-product'])
+      }
+  
+
+    }
+    
+   
+   
+   
+
 
 
 
