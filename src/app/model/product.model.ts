@@ -7,4 +7,5 @@ export class Product{
     tags?: string;
     description: string;
     id?: string;
+    checked?:boolean;
 }

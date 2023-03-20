@@ -34,7 +34,7 @@ export class ProductService {
                 const product_data = [];
                 for (const key in res) {
                     if (res.hasOwnProperty(key)) {
-                        product_data.push({ ...res[key], id: key, select: false })
+                        product_data.push({ ...res[key],id:key, select: false })
                     }
                 }
                 return product_data;

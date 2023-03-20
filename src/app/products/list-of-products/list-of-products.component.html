@@ -14,8 +14,7 @@
             [hidden]="!allowProductSearch">
             <span class="fa fa-search" id="search2" [hidden]="!allowProductSearch"></span>
         </div>
-
-
+   
         <div class="product-data">
 
             <div class="btn">
@@ -27,11 +26,10 @@
                     Delete all Products list</button>
             </div>
 
-           
             <table class="table table-bordered">
                 <thead>
                   <tr class="head-data">
-                    <th *ngIf="allowMultipleDelete"><input type="checkbox" id="check"></th>
+                    <th *ngIf="allowMultipleDelete"><input type="checkbox" id="check" (change)="onTopChecked($event)" [(ngModel)]="isOnTopChecked"></th>
                     <th>Name</th>
                     <th>Product Expiry</th>
                     <th>No. of items in stock</th>
@@ -44,9 +42,9 @@
                </thead>
 
                <tbody>
-               <tr *ngFor="let product of productData | filter:searchBarValue1  ">
+               <tr *ngFor="let product of productData | filter:searchBarValue1 | sort:'stock' ">
 
-                <td *ngIf="allowMultipleDelete"><input type="checkbox" name="check" id="check" (change)="onChecked(product.id)"></td>
+                <td *ngIf="allowMultipleDelete"><input type="checkbox" name="check" id="check" (change)="onChecked(product.id)" [(ngModel)]="product.checked"></td>
                 <td><a href="#" routerLink="/products-details/{{product.id}}" style="text-decoration: none;">{{product.productName}}</a></td>
                 <td>{{product.expiry}}</td>
                 <td>{{product.stock}}</td>
@@ -72,12 +70,7 @@
               </tr>
             </tbody>
         </table>
-       
-       
-
-
-       
+       </div>
     
-    </div>
 </div>
 </div> 

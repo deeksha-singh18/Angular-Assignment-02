@@ -20,6 +20,7 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
   allowEdit = true;
   productData: Product[] = [];
   product: Product;
+  isOnTopChecked:boolean;
   allSelectedItems = "";
   selectItem = ""
   selectedItems = [];
@@ -111,11 +112,32 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
 
   }
 
+  onTopChecked(ev:any){
+    
+    if(this.isOnTopChecked){
+      this.productData.forEach(x => x.checked = ev.target.checked)
+      console.log(ev);
+    
+      for(let item of this.productData){
+        this.selectedItems.push(item.id)
+      }
+      console.log(this.selectedItems);
+    }
+
+    else{
+      this.productData.forEach(x => x.checked = ev.target.checked);
+      this.selectedItems=[];
+      console.log(ev);
+
+    }
+    
+
+  }
+
 
   deleteSelectedItems() {
     if (this.selectedItems.length === 0) {
       alert("Select items first to proceed!")
-
     }
     else {
       if (confirm("Do you want to delete selected products ?")) {
