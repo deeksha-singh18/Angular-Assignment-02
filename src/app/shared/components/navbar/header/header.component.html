@@ -1,24 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
 
-  <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
+  <!-- <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
     <i class="fa-sharp fa-solid fa-bars"></i>
-     </div>
+     </div> -->
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <a class="navbar-brand px-4"style="color:white ; margin-left:10px" href="#" routerLink="/main" >Angular Assignment-02</a>
       
     
         <ul class="navbar-nav me-10 mb-5 mb-lg-0">
 
-          <li *ngIf="!isAuthenticated">
+          <li>
             <button class="btn btn-success dropdown dropdown-toggle" (click)="onLogin()"
-               >Login
+            *ngIf="!isAuthenticated">Login
               </button>
           </li>
 
-          <li *ngIf="isAuthenticated">
+          <li >
             <button class="btn btn-danger dropdown dropdown-toggle" (click)="onLogout()"
-            >Logout
+            *ngIf="isAuthenticated">Logout
            </button>
           </li>
 

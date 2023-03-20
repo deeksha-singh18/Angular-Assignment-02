@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container">
     <div class="card">
         <div class="heading">
@@ -38,7 +39,12 @@
                 (click)="onReset()">Reset</button>
            
               <button type="submit" class="btn btn-success"
-                style="margin-left:80px">Save</button>
+                style="margin-left:50px">Save</button>
+
+              <button type="button" class="btn btn-secondary" id="cancel"
+                style="margin-left: 50px;" routerLink="/main">Cancel</button>
+              
+        
         </form>
        
     </div>

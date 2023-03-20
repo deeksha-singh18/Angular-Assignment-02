@@ -3,23 +3,23 @@
 
       <li class="nav-item">
         <i class="fa fa-fw fa-home"></i>
-        <span><a href="#" routerLink="/home">Home</a></span>
+        <span><a (click)="onHome()">Home</a></span>
       </li>
 
 
       <li class="nav-item" *ngIf="allowCreate">
         <i class="fas fa-shopping-cart"></i>
-        <span><a href="#" routerLink="/quick-create-product">Quick Create Product</a></span>
+        <span><a (click)="onQuickCreateProduct()">Quick Create Product</a></span>
       </li>
 
       <li class="nav-item" *ngIf="allowCreate">
         <i class="fas fa-shopping-cart"></i>
-        <span><a href="#" routerLink="/create-product">Create Product</a></span>
+        <span><a (click)="onCreateProduct()">Create Product</a></span>
       </li>
 
       <li class="nav-item" *ngIf="isAdmin">
         <i class="fas fa-cog mx-1"></i>
-        <span><a href="#" routerLink="/settings">Settings</a></span>
+        <span><a routerLink="/settings">Settings</a></span>
       </li>
   </ul>
 

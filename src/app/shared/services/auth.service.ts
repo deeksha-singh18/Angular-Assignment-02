@@ -96,22 +96,24 @@ export class AuthService{
     handleAuthentication(email:string,userId:string,token:string,expiresIn:number){
       
       const expirationDate= new Date(new Date().getTime() + expiresIn*1000);
-      const user= new User(email,userId,token,expirationDate);
-      console.log("user => ",user);
-      this.user.next(user);
+      const userobj= new User(email,userId,token,expirationDate);
+      console.log("user => ",userobj);
+      this.user.next(userobj);
+      localStorage.setItem('userData',JSON.stringify(userobj));
 
     }
 
     
     logout(){
       this.user.next(null);
+      localStorage.removeItem('userData');
     }
 
-    userLoggedIn(user){
-      console.log("user logged in");
+    // userLoggedIn(user){
+    //   console.log("user logged in");
       
-      this.user.next(user);
-    }
+    //   this.user.next(user);
+    // }
 
 
 

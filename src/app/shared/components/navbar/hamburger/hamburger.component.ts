@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SettingService } from 'src/app/shared/services/setting.service';
 
@@ -13,7 +14,10 @@ export class HamburgerComponent implements OnInit {
   allowCreate:boolean=true;
   isAdmin:boolean=false;
 
-  constructor(private settingService:SettingService,private authService:AuthService){}
+  constructor(private settingService:SettingService,private authService:AuthService,
+    private router:Router){}
+
+  @Input() isSideBar:boolean=false;
 
   ngOnInit(): void {
 
@@ -21,11 +25,39 @@ export class HamburgerComponent implements OnInit {
     subscribe(resData=>{
       this.allowCreate=resData.isCreate;
     });
-
-    
-    
+  }
+  
+  onHome(){
+    if(!localStorage.getItem('userData')){
+      alert('Please login first to proceed!');
+    }
+    else{
+      this.router.navigate(['/home']);
+    }
   }
 
-  @Input() isSideBar:boolean=false;
+
+  onQuickCreateProduct(){
+    if(!localStorage.getItem('userData')){
+      alert('Please login first to proceed!');
+    }
+    else{
+      this.router.navigate(['/quick-create-product']);
+    }
+
+  }
+
+  onCreateProduct(){
+    if(!localStorage.getItem('userData')){
+      alert('Please login first to proceed!');
+    }
+    else{
+      this.router.navigate(['/create-product']);
+    }
+  }
+
+  
+
+
 
 }

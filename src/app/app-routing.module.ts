@@ -18,23 +18,19 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'admin',component:AdminComponent},
   {path:'main',component:NavbarComponent},
+  
   {path:'home',component:ListOfProductsComponent},
+  {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
+  {path:'create-product/:id',component:CreateProductComponent,canActivate:[AuthGuard]},
+  {path:'quick-create-product',component:QuickCreateProductComponent,canActivate:[AuthGuard]},
+  {path:'products-details/:id',component:ProductsDetailsComponent,canActivate:[AuthGuard]},
+  {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
 
-  // {path:'create-product/:id',component:CreateProductComponent,canActivate:[AuthGuard]},
-<<<<<<< HEAD
-  // {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
-=======
-//   {path:'create-product',component:CreateProductComponent,canActivate:[AuthGuard]},
->>>>>>> aaa91011382e877337ac521ef59fc57282825716
-  // {path:'quick-create-product',component:QuickCreateProductComponent,canActivate:[AuthGuard]},
-  // {path:'products-details/:id',component:ProductsDetailsComponent,canActivate:[AuthGuard]},
-  // {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
-
-  {path:'create-product/:id',component:CreateProductComponent},
-  {path:'create-product',component:CreateProductComponent},
-  {path:'quick-create-product',component:QuickCreateProductComponent},
-  {path:'products-details/:id',component:ProductsDetailsComponent},
-  {path:'settings',component:SettingsComponent},
+  // {path:'create-product/:id',component:CreateProductComponent},
+  // {path:'create-product',component:CreateProductComponent},
+  // {path:'quick-create-product',component:QuickCreateProductComponent},
+  // {path:'products-details/:id',component:ProductsDetailsComponent},
+  // {path:'settings',component:SettingsComponent},
   {path:'**',component:NotFoundComponent},
  
   

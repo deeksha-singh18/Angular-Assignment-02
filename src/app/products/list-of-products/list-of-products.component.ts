@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/model/product.model';
 import { Router } from '@angular/router';
-import { map, fromEvent, pipe, debounceTime, distinctUntilChanged } from 'rxjs';
+import { map, fromEvent, pipe, debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { SettingService } from 'src/app/shared/services/setting.service';
 
 @Component({
@@ -12,128 +12,144 @@ import { SettingService } from 'src/app/shared/services/setting.service';
 })
 
 
-export class ListOfProductsComponent implements OnInit,AfterViewInit {
+export class ListOfProductsComponent implements OnInit, AfterViewInit {
 
-  searchBarValue1="";
-  allowMultipleDelete=false;
-  allowProductSearch=true;
-  allowEdit=true;
-  productData:Product[]=[];
-  product:Product;
-  allSelectedItems="";
-  selectItem=""
-  selectedItems=[];
+  searchBarValue1 = "";
+  allowMultipleDelete = false;
+  allowProductSearch = true;
+  allowEdit = true;
+  productData: Product[] = [];
+  product: Product;
+  allSelectedItems = "";
+  selectItem = ""
+  selectedItems = [];
 
-  @ViewChild('searchBarValue2') searchValue:ElementRef;
+  @ViewChild('searchBarValue2') searchValue: ElementRef;
 
-  constructor(private productService:ProductService,private router:Router,
-    private settingService:SettingService){}
+  constructor(private productService: ProductService, private router: Router,
+    private settingService: SettingService) { }
 
 
   ngOnInit(): void {
-   
+
     this.productService.getProductDetails()
-    .subscribe(data =>{
-      this.productData=data;
-    })
+      .subscribe(data => {
+        this.productData = data;
+      })
 
     this.settingService.getSettings().
-    subscribe(resData=>{
-      this.allowMultipleDelete=resData.isMultipleDelete;
-      this.allowProductSearch=resData.isProductSearch;
-      this.allowEdit=resData.isEdit;
-    })
-    
+      subscribe(resData => {
+        this.allowMultipleDelete = resData.isMultipleDelete;
+        this.allowProductSearch = resData.isProductSearch;
+        this.allowEdit = resData.isEdit;
+      })
+
   }
 
   ngAfterViewInit(): void {
-    
-    const searchedData = fromEvent<any>(this.searchValue.nativeElement,'keyup')
-    .pipe(map(event => event.target.value),
-    debounceTime(1000),
-    distinctUntilChanged())
 
-    searchedData.subscribe(res =>{
+    const searchedData = fromEvent<any>(this.searchValue.nativeElement, 'keyup')
+      .pipe(map(event => event.target.value),
+        debounceTime(1000),
+        distinctUntilChanged())
+
+    searchedData.subscribe(res => {
       console.log(res);
-      this.productService.searchedProducts(res)
-      .subscribe((res:Product[]) =>{
-        this.productData=res;
-      })
-      
-    })
-  }
-
-
-
-  onEdit(id:string){
-    if(this.allowEdit){
-      this.router.navigate(['/create-product',id]);
-    }
-    
-  }
-
-   
-   onRemove(id:string){
-    if (confirm("Do you want to remove it ?")){
-      this.productService.deleteProduct(id)
-      .subscribe(()=>{
       this.productService.getProductDetails()
-      .subscribe((data)=>{
-       this.productData=data;
-      });
+        .subscribe((data) => {
+          console.log(data);
+          const filteredData = [];
+          data.filter((item) => {
+            if (
+              item.productName.toLowerCase().includes(res.toLowerCase()) ||
+              item.subheading?.toLowerCase().includes(res.toLowerCase()) || item.heading?.toLowerCase().includes(res.toLowerCase()) || item.tags?.toLowerCase().includes(res.toLowerCase())) {
+              filteredData.push(item)
+            }
+
+          })
+          console.log(filteredData);
+          this.productData = filteredData;
+        });
     })
+  }
+
+
+
+  onEdit(id: string) {
+    if (this.allowEdit) {
+      this.router.navigate(['/create-product', id]);
+    }
+
+  }
+
+
+  onRemove(id: string) {
+    if (confirm("Do you want to remove it ?")) {
+      this.productService.deleteProduct(id)
+        .subscribe(() => {
+          this.productService.getProductDetails()
+            .subscribe((data) => {
+              this.productData = data;
+            });
+        })
 
     }
-   
-    
+
+
   }
 
-  onChecked(itemId:string){
-   
-      if(this.selectedItems.find(x => x === itemId)){
-         this.selectedItems.splice(this.selectedItems.indexOf(itemId),1);
-      }
-      else{
-       this.selectedItems.push(itemId);
-      }
-       console.log(this.selectedItems);
-    
-      
+  onChecked(itemId: string) {
+
+    if (this.selectedItems.find(x => x === itemId)) {
+      this.selectedItems.splice(this.selectedItems.indexOf(itemId), 1);
+    }
+    else {
+      this.selectedItems.push(itemId);
+    }
+    console.log(this.selectedItems);
+
+
   }
 
 
-  deleteSelectedItems(){
-    if(confirm("Do you want to delete selected products ?")){
-      for(let itemId of this.selectedItems){
-         this.productService.deleteProduct(itemId)
-         .subscribe(()=>{
-         this.productService.getProductDetails()
-         .subscribe(resData=>{
-          this.productData=resData;
-        })
+  deleteSelectedItems() {
+    if (this.selectedItems.length === 0) {
+      alert("Select items first to proceed!")
+
+    }
+    else {
+      if (confirm("Do you want to delete selected products ?")) {
+        for (let itemId of this.selectedItems) {
+          this.productService.deleteProduct(itemId)
+            .subscribe(() => {
+              this.productService.getProductDetails()
+                .subscribe(resData => {
+                  this.productData = resData;
+                })
+            })
+        }
+      }
+
+
+
+    }
+
+
+  }
+
+  deleteAllProductsData() {
+    if (confirm("Do you want to delete all products list ?")) {
+      this.productService.deleteAllProducts().subscribe(() => {
+        this.productData = [];
       })
     }
-     
-
-    
-  }
-    
-
-}
-
-  deleteAllProductsData(){
-    if(confirm("Do you want to delete all products list ?")){
-       this.productService.deleteAllProducts().subscribe(()=>{
-       this.productData=[];
-    })
-  }
   }
 
 
-  
 
 
 
-  
+
+
 
 }

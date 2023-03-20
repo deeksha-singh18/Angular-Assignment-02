@@ -20,23 +20,20 @@ export class HeaderComponent implements OnInit {
   isAuthenticated=false;
   @Output() sideBarToggled = new EventEmitter<boolean>();
   showSideBar: boolean = false;
-
-
+  isLoaded:boolean;
   
-
+  
   ngOnInit(){
 
-     this.authService.user.subscribe(res => {
-      if(res){
-        this.isAuthenticated=true;
-      }
-      else{
-        this.isAuthenticated=false;
-      }
-      // this.isAuthenticated=!res ? false : true;
-      console.log("user is" ,this.isAuthenticated);
-      console.log(res);
-      });
+    this.isAuthenticated=localStorage.getItem('userData')? true : false;
+
+    //  this.authService.user.subscribe(res => {
+    //    this.isAuthenticated=res ? true : false;
+    //    this.isLoaded=true;
+     
+    //   console.log("user is" ,this.isAuthenticated);
+    //   console.log(res);
+    //   });
    
     
   }
@@ -58,7 +55,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.isAuthenticated=false;
     console.log("Sucessfully logout");
-    this.router.navigate(['/login-type'])
+    this.router.navigate(['/main'])
   }
 
 

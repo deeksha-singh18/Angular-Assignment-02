@@ -1,4 +1,3 @@
-
 .card{
   
     border: none;
@@ -6,11 +5,8 @@
     padding: 50px;
     position: absolute;
     left: 50%;
-    transform:translate(-50%,40%);
+    transform:translate(-50%,30%);
     background:linear-gradient(#7F8C8D,#000000);
-   
-   
-  
   }
 
   input.ng-invalid.ng-touched{
@@ -43,6 +39,8 @@
     left: 50%;
     transform:translate(-50%,80%);
   }
+  
+
   
   
   

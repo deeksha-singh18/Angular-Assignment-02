@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/model/product.model';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class CreateProductComponent {
 
 
   constructor(private productService: ProductService, private router: Router,
-    private activateRoute: ActivatedRoute) { }
+    private activateRoute: ActivatedRoute,private location:Location) { }
 
 
   ngOnInit() {
@@ -108,7 +109,8 @@ export class CreateProductComponent {
 
 
   onCancel() {
-    this.router.navigate(['/home']);
+    this.location.back();
+    // this.router.navigate(['/home']);
   }
 
 

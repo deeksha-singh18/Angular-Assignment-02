@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-quick-create-product',
@@ -16,7 +17,8 @@ export class QuickCreateProductComponent {
   @ViewChild('form') form:NgForm;
   
 
-  constructor(private router:Router,private productService:ProductService,private http:HttpClient){}
+  constructor(private router:Router,private productService:ProductService,private http:HttpClient,
+    private location:Location){}
 
   onSubmit(){
     const productData=this.form.value;
@@ -32,5 +34,11 @@ export class QuickCreateProductComponent {
     });
     
   }
+
+  onCancel() {
+    this.location.back();
+    // this.router.navigate(['/home']);
+  }
+
 
 }
