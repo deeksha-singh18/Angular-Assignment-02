@@ -22,7 +22,7 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
   product: Product;
   isOnTopChecked:boolean;
   allSelectedItems = "";
-  selectItem = ""
+  isSelectItem="Select all";
   selectedItems = [];
 
   @ViewChild('searchBarValue2') searchValue: ElementRef;
@@ -51,19 +51,19 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
 
     const searchedData = fromEvent<any>(this.searchValue.nativeElement, 'keyup')
       .pipe(map(event => event.target.value),
-        debounceTime(1000),
+        debounceTime(500),
         distinctUntilChanged())
 
     searchedData.subscribe(res => {
       console.log(res);
       this.productService.getProductDetails()
         .subscribe((data) => {
-          console.log(data);
           const filteredData = [];
           data.filter((item) => {
             if (
-              item.productName.toLowerCase().includes(res.toLowerCase()) ||
-              item.subheading?.toLowerCase().includes(res.toLowerCase()) || item.heading?.toLowerCase().includes(res.toLowerCase()) || item.tags?.toLowerCase().includes(res.toLowerCase())) {
+              item.productName.toLowerCase().includes(res.toLowerCase()) || item.description?.toLowerCase()?.includes(res.toLowerCase()) ||
+              item.subheading?.toLowerCase().includes(res.toLowerCase()) || item.heading?.toLowerCase().includes(res.toLowerCase()) || item.tags?.toLowerCase().includes(res.toLowerCase())) 
+              {
               filteredData.push(item)
             }
 
@@ -115,11 +115,13 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
   onTopChecked(ev:any){
     
     if(this.isOnTopChecked){
+      this.isSelectItem="undo all";
       this.productData.forEach(x => x.checked = ev.target.checked)
-      console.log(ev);
     
       for(let item of this.productData){
-        this.selectedItems.push(item.id)
+        if(!this.selectedItems.includes(item.id)){
+          this.selectedItems.push(item.id)
+        }
       }
       console.log(this.selectedItems);
     }
@@ -127,8 +129,7 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
     else{
       this.productData.forEach(x => x.checked = ev.target.checked);
       this.selectedItems=[];
-      console.log(ev);
-
+      this.isSelectItem="Select all";
     }
     
 
@@ -140,7 +141,7 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
       alert("Select items first to proceed!")
     }
     else {
-      if (confirm("Do you want to delete selected products ?")) {
+      if (confirm("Do you want to delete all selected products ?")) {
         for (let itemId of this.selectedItems) {
           this.productService.deleteProduct(itemId)
             .subscribe(() => {
@@ -150,6 +151,17 @@ export class ListOfProductsComponent implements OnInit, AfterViewInit {
                 })
             })
         }
+      }
+      else{
+        this.productData.forEach(x => x.checked = false);
+        if(this.isOnTopChecked){
+          this.isOnTopChecked=false;
+          this.isSelectItem="Select all";
+        }
+       
+        this.selectedItems=[];
+
+
       }
 
 

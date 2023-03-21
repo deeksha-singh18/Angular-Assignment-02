@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserData } from 'src/app/model/userdata.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SettingService } from 'src/app/shared/services/setting.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-hamburger',
@@ -11,53 +12,65 @@ import { SettingService } from 'src/app/shared/services/setting.service';
 })
 export class HamburgerComponent implements OnInit {
 
-  allowCreate:boolean=true;
-  isAdmin:boolean=false;
+  allowCreate: boolean = true;
+  userData: UserData[] = [];
+  isAdmin: boolean = false;
 
-  constructor(private settingService:SettingService,private authService:AuthService,
-    private router:Router){}
+  constructor(private settingService: SettingService,
+    private router: Router, private userService: UserService) { }
 
-  @Input() isSideBar:boolean=false;
 
   ngOnInit(): void {
 
     this.settingService.getSettings().
-    subscribe(resData=>{
-      this.allowCreate=resData.isCreate;
-    });
+      subscribe(resData => {
+        this.allowCreate = resData.isCreate;
+      });
+
+    if (localStorage.getItem('user')) {
+      this.userService.getUserData().
+        subscribe(resData => {
+          this.userData = resData;
+          this.isAdmin = this.userData[0].isAdmin;
+        })
+    }
+   
   }
-  
-  onHome(){
-    if(!localStorage.getItem('userData')){
+
+
+  onHome() {
+    if (!localStorage.getItem('user')) {
       alert('Please login first to proceed!');
     }
-    else{
+    else {
       this.router.navigate(['/home']);
     }
   }
-
-
-  onQuickCreateProduct(){
-    if(!localStorage.getItem('userData')){
+  
+  onQuickCreateProduct() {
+    if (!localStorage.getItem('user')) {
       alert('Please login first to proceed!');
     }
-    else{
+    else {
       this.router.navigate(['/quick-create-product']);
     }
-
   }
 
-  onCreateProduct(){
-    if(!localStorage.getItem('userData')){
+  onCreateProduct() {
+    if (!localStorage.getItem('user')) {
       alert('Please login first to proceed!');
     }
-    else{
+    else {
       this.router.navigate(['/create-product']);
     }
   }
 
-  
-
 
 
 }
+
+
+
+
+
+

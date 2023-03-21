@@ -22,14 +22,14 @@
                     Delete selected Products</button>
                 <button type="button" class="btn btn-primary" routerLink="/main"
                 style="margin-left: 40px;">Go to Main screen</button>
-                <button class="btn btn-danger" (click)="deleteAllProductsData()" style="margin-left: 40px;">
-                    Delete all Products list</button>
+                <!-- <button class="btn btn-danger" (click)="deleteAllProductsData()" style="margin-left: 40px;">
+                    Delete all Products list</button> -->
             </div>
 
             <table class="table table-bordered">
                 <thead>
                   <tr class="head-data">
-                    <th *ngIf="allowMultipleDelete"><input type="checkbox" id="check" (change)="onTopChecked($event)" [(ngModel)]="isOnTopChecked"></th>
+                    <th *ngIf="allowMultipleDelete"><input type="checkbox" id="check" (change)="onTopChecked($event)" [(ngModel)]="isOnTopChecked">{{isSelectItem}}</th>
                     <th>Name</th>
                     <th>Product Expiry</th>
                     <th>No. of items in stock</th>

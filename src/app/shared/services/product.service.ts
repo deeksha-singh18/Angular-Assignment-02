@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Product } from "src/app/model/product.model";
-import { filter, map } from "rxjs";
+import { map } from "rxjs";
 
 
 @Injectable({
@@ -50,13 +50,6 @@ export class ProductService {
     deleteAllProducts() {
         return this.http.delete('https://angular-assignment-2906b-default-rtdb.firebaseio.com/products.json');
     }
-
-    
-
-
-   
-
-
 
 }
 

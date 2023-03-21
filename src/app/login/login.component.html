@@ -2,14 +2,10 @@
   <div class="row">
     <div class="col-md-6">
 
-      <div *ngIf="isLoading">
-        <app-loading-spinner></app-loading-spinner>
-      </div>
-
      <app-alert [message]="error" *ngIf="error"
       (close)="onHandleError()"></app-alert>
 
-      <div class="card" *ngIf="!isLoading">
+      <div class="card">
 
         <div class="text-center">
           <h1>{{loginMode ? 'Login':'SignUp'}}</h1>
@@ -17,6 +13,10 @@
         
         
         <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+          <!-- <div *ngIf="error">
+            <p class="text-center" style="color:red">Incorrect Username or password</p>
+          </div> -->
 
           <div class="mb-3" *ngIf="!loginMode">
 

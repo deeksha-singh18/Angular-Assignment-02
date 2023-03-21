@@ -1,12 +1,11 @@
 <div class="side-bar">
-  <ul class="nav-list" [ngClass]="{'nav-list-open':isSideBar}">
+  <ul class="nav-list">
 
       <li class="nav-item">
         <i class="fa fa-fw fa-home"></i>
         <span><a (click)="onHome()">Home</a></span>
       </li>
-
-
+      
       <li class="nav-item" *ngIf="allowCreate">
         <i class="fas fa-shopping-cart"></i>
         <span><a (click)="onQuickCreateProduct()">Quick Create Product</a></span>

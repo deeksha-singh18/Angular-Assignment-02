@@ -1,7 +1,7 @@
 export class UserData{
-    id:string;
+    id?:string;
     fullName:string;
     email:string;
     password:string;
-    isAdmin?:boolean=false;
+    isAdmin:boolean=false;
 }

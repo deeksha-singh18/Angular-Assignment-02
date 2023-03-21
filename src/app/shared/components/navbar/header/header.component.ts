@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Output,EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserData } from 'src/app/model/userdata.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -14,18 +16,36 @@ import { Output,EventEmitter } from '@angular/core';
 
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router,private authService:AuthService){}
+  constructor(private router:Router,private authService:AuthService,private http:HttpClient,
+    private userService:UserService){}
 
   // private userSub:Subscription;
   isAuthenticated=false;
-  @Output() sideBarToggled = new EventEmitter<boolean>();
-  showSideBar: boolean = false;
-  isLoaded:boolean;
-  
+  userData:UserData[]=[];
+  userInfo:UserData;
+  userName:string="";
+  isAdmin:boolean=false;
   
   ngOnInit(){
+    this.isAuthenticated=localStorage.getItem('user')? true : false;
 
-    this.isAuthenticated=localStorage.getItem('userData')? true : false;
+    // this.userService.userInfo
+    // .subscribe(resData =>{
+    //   this.userInfo=resData;
+    //   this.userName=resData.fullName;
+    //   console.log(this.userName);
+      
+    // })
+    if(this.isAuthenticated){
+
+    this.userService.getUserData()
+    .subscribe(resData=>{
+      this.userData=resData;
+      this.userName=this.userData[0].fullName;
+      this.isAdmin=this.userData[0].isAdmin;
+    })
+  }
+    
 
     //  this.authService.user.subscribe(res => {
     //    this.isAuthenticated=res ? true : false;
@@ -37,15 +57,7 @@ export class HeaderComponent implements OnInit {
    
     
   }
-
-
-  SideNavToggle() {
-    this.showSideBar = !this.showSideBar;
-    this.sideBarToggled.emit(this.showSideBar);
-  }
-
- 
-
+  
   onLogin(){
     this.router.navigate(['/login']);
   }
@@ -55,7 +67,14 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.isAuthenticated=false;
     console.log("Sucessfully logout");
-    this.router.navigate(['/main'])
+    if(this.isAdmin){
+      this.router.navigate(['/login-type'])
+    }
+    else{
+      this.router.navigate(['/main'])
+    }
+   
+   
   }
 
 

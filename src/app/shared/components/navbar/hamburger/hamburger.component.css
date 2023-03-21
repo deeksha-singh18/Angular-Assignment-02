@@ -13,13 +13,10 @@ ul li{
     margin-bottom: 40px;
     color: white;
     list-style: none;
-   
-    
 }
 
 ul li a:hover{
     color: green;
-
 }
 
 span{

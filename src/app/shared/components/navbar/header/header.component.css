@@ -1,8 +1,18 @@
-.side-nav-button{
-    font-size: 22px;
-    margin-left: 10px;
+.dropdown-item{
     cursor: pointer;
-    position: fixed;
+    color: red;
+    font-size: large;
+    font-weight:600;
 }
+
+#user-link {
+    font-size: 20px;
+    text-decoration: none;
+    color:greenyellow;
+    cursor: pointer;
+    font-weight:600;
+}
+
+
 
 
