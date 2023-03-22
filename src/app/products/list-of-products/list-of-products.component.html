@@ -1,8 +1,9 @@
+ <app-header></app-header>
  <div class="container">
     <div class="list">
 
         <div class="text-center">
-            <h1 style="margin-top: 20px;">List of Products</h1>
+            <h1 style="margin-top: 85px;">List of Products</h1>
         </div>
 
         <div class="search-bars">
@@ -10,7 +11,7 @@
             <input type="search" class="search-bar-1" placeholder="Search...." [(ngModel)]="searchBarValue1">
              <span class="fa fa-search" id="search1"></span>
 
-           <input type="search" class="search-bar-2" placeholder="Search...." #searchBarValue2
+           <input type="search" class="search-bar-2" placeholder="Search from api call...." #searchBarValue2
             [hidden]="!allowProductSearch">
             <span class="fa fa-search" id="search2" [hidden]="!allowProductSearch"></span>
         </div>

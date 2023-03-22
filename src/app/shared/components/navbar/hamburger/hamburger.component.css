@@ -3,7 +3,13 @@
     width: 350px;
     height: 800px;
     padding: 20px;
+    position: fixed;
 }
+
+ul{
+    margin-top: 90px;
+}
+
 
 ul li{
     font-size: 20px;
@@ -16,7 +22,7 @@ ul li{
 }
 
 ul li a:hover{
-    color: green;
+    color: yellowgreen;
 }
 
 span{

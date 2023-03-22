@@ -1,10 +1,9 @@
-.card{
-  
+  .card{
     border: none;
     width: 400px;
     padding: 50px;
     position: absolute;
-    left: 50%;
+    left: 46%;
     transform:translate(-50%,30%);
     background:linear-gradient(#7F8C8D,#000000);
   }
